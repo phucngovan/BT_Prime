@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+  <form>
+      <table>
+          <h3>Chọn Phương Thức:</h3> <br>
+          <tr>
+              <select id="Chooes">
+                  <option value="check" >Số này phải số nguyên tố không?</option>
+                  <option value="show">Các số  nguyên tố cần tìm</option>
+                  <option value="condition">Các số nguyên tố với điêu kiện </option>
+              </select>
+
+          </tr>
+          <tr>
+              <h3><b>Nhập số của bạn</b></h3>
+          </tr>
+          <tr>
+              <td><input id="num"type="number"></td>
+              <td><input type="button" onclick="Luachon()" value="Thực hiện" ></td>
+          </tr>
+
+      </table>
+      Kết Quả:
+      <output id="output"></output>
+  </form>
+  <script>
+let prime=function (num) {
+    if (num<2) {
+        return false;
+    }
+    if (num===2) {
+        return true;
+    }else {
+        for (let i=2 ;i<=num/2;i++) {
+            if (num%i==0) {
+                return false;
+            }else {
+                return true;
+            }
+        }
+    }
+
+}
+function Luachon() {
+let a=document.getElementById("Chooes")[document.getElementById("Chooes").selectedIndex];
+a=a.value;
+let num=document.getElementById("num");
+num=parseInt(num.value);
+let rep ="";
+switch (a) {
+    case "check" :
+        let result = prime(num);
+        if (result == true){
+            rep += +num + " là số nguyên tố";
+            break;
+        }else{rep += +num + " không phải là số nguyên tố"
+            break;}
+    case "show":
+        let count = 0;
+        let i=2;
+        let arr=[];
+        while (count < num+1){
+            if(prime(i)){
+                arr.push(i);
+                count++;
+            }i=i+1;
+        }for (let j=0; j <num; j++){
+        rep +="<br>"+"Số nguyên tố thứ "+(j+1)+" là: " + arr[j];
+    }break;
+    case "condition":
+        let k=2;
+        let arr2=[];
+        while (k < num){
+            if(prime(k)){
+                arr2.push(k);
+            }k=k+1;
+        }for (let j=0; j <arr2.length; j++){
+        rep +="<br>"+"Số nguyên tố thứ "+(j+1)+" là: " + arr2[j];
+    }
+}
+    document.getElementById("output").innerHTML = rep;
+
+
+}
+
+  </script>
+
+</body>
+</html>
